@@ -10,7 +10,9 @@ class App extends Component {
     this.state = {
       currentUsers: messageData.currentUsers,
       messages: messageData.messages,
-    }
+    };
+    
+
   }
 
   componentDidMount() {
@@ -36,10 +38,23 @@ class App extends Component {
           <MessageList messages={this.state.messages}/>
         </div>
         <div>
-          <ChatBar />
+          <ChatBar newText = {this._newText}/>
         </div>
       </div>
     );
   }
+
+  _newText = (text) => {
+    let setProfile= {
+      "username": "Bob",
+        "content": text,
+        "id": (Math.random()),
+    }
+    const oldTexts = this.state.messages;
+    const newTexts = [...oldTexts, setProfile]
+    this.setState({
+      messages: newTexts,
+    })
+  };
 }
 export default App;
