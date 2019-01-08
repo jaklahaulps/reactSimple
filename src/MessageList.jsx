@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import messages from './Message.jsx';
+import Messages from './Message.jsx';
 
 class MessageList extends Component {
 
     render() {
-        console.log("TEST: ",this.props.messages)
         return (
             <main className="messages">
                 <div className="message">

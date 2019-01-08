@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import messageData from './messageData';
 
 
 
-class Message extends Component {
+
+class Messages extends Component {
     
 
 }
 
-export default Message;
+export default Messages;
