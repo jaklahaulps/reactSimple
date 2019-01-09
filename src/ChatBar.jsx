@@ -15,9 +15,18 @@ class ChatBar extends Component {
             }
         }
 
+        let nameInput = (event) => {
+            if (event.key === 'Enter') {
+                console.log("Name Enter key was hit", event);
+                const keys = event.target.value;
+                this.props.newName(keys);
+                event.target.value = "";
+            }
+        }
+
         return (
             <footer className="chatbar">
-                <input name="chatbarUsername" className="chatbar-username" placeholder="Your Name (Optional)" />
+                <input name="chatbarUsername" className="chatbar-username" placeholder="Your Name (Optional)" onKeyPress = {nameInput}/>
                 <input id="chatbarMessage" className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress ={messageInput}/>
             </footer>
         )
