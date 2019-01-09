@@ -8,7 +8,7 @@ class ChatBar extends Component {
         
         let messageInput = (event) => {
             if (event.key === 'Enter') {
-                console.log("Enter was hit", event)
+                console.log("Enter was hit", event);
                 const keys = event.target.value;
                 this.props.newText(keys);
                 event.target.value = "";
