@@ -51,7 +51,6 @@ class App extends Component {
           })
           console.log("Display numOfClients- Post update: ", this.state.numOfClients)
           break; 
-
         default:
       }
     };

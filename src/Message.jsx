@@ -3,22 +3,24 @@ import React, {Component} from 'react';
 
 class Message extends Component {
     render(){
-        switch (this.props.message.type) {
+        const prop = this.props.message
+        console.log("text color", this.props.message.textColor)
+        switch (prop.type) {
             
             case 'incomingMessage':
-                console.log("Incoming Notification render: ",this.props.message)
+                console.log("Incoming Notification render: ",prop)
                 return (
                     <div className="message">
-                        <span className="message-username">{this.props.message.currentUser}</span>
-                        <span className="message-content">{this.props.message.content}</span>
+                        <span className="message-username" style={{ color: prop.textColor }}> {prop.currentUser}</span>
+                        <span className="message-content">{prop.content}</span>
                     </div>
                 )
             
                 case 'incomingNotification':
-                console.log("Incoming Notification render: ",this.props.messages)
+                console.log("Incoming Notification render: ",prop)
                 return (
                     <div className="message">
-                        <span className="message-content">{this.props.message.content}</span>
+                        <span className="message-content">{prop.content}</span>
                     </div>
                 )
             

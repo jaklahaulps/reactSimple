@@ -3,6 +3,7 @@ const WebSocket = require('ws')
 const express = require('express');
 const SocketServer = require('ws').Server;
 const uuid = require('uuidv4');
+const randomHexColor = require('random-hex-color');
 
 // Set the port to 3001
 const PORT = 3001;
@@ -29,8 +30,8 @@ wss.broadcast = data => {
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
-  console.log('User')
-  //Count current users, broadcast current user count.
+  
+//Count current users, broadcast current user count.
   const numConnected = {
       type: 'numOfClients',
       numClients: wss.clients.size,
@@ -38,6 +39,12 @@ wss.on('connection', (ws) => {
   console.log(numConnected)
   wss.broadcastJSON (numConnected);
   
+  //if socket does not have a text color assigned, assign one to user's ws object.
+  if (ws.textColor === undefined){
+    ws.textColor = randomHexColor();
+    console.log(ws.textColor);
+  }
+
   //When message is received.
   ws.on('message', data => {
     const objData = JSON.parse(data);
@@ -51,6 +58,7 @@ wss.on('connection', (ws) => {
             id: uuid(),
             content: objData.content,
             type: 'incomingMessage',
+            textColor: ws.textColor,
         };
         wss.broadcastJSON(objectToBroadcast);
         break;
