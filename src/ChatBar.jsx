@@ -20,7 +20,6 @@ class ChatBar extends Component {
                 console.log("Name Enter key was hit", event);
                 const keys = event.target.value;
                 this.props.newName(keys);
-                event.target.value = "";
             }
         }
 

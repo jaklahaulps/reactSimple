@@ -36,15 +36,25 @@ wss.on('connection', (ws) => {
         wss.broadcastJSON = obj => wss.broadcast(JSON.stringify(obj));
 
         switch (objData.type) {
-            case 'textmessage':
+            case 'postMessage':
                 console.log('inside switch', objData);
                 const objectToBroadcast = {
                     currentUser: objData.username,
                     id: uuid(),
                     content: objData.content,
-                    type: 'textmessage',
+                    type: 'incomingMessage',
                 };
                 wss.broadcastJSON(objectToBroadcast);
+                break;
+            case 'postNotification':
+                console.log('inside post message')
+                const objectToBroadcast02 = {
+                  currentUser: objData.content,
+                  id: uuid(),
+                  content: `${objData.username} has changed their name to ${objData.content}`,
+                  type: 'incomingNotification'
+                };
+                wss.broadcastJSON(objectToBroadcast02);
                 break;
             default:
         }

@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      currentUser: "Bob",
+      currentUser: "Annoymous",
       messages: [],
     };
     
@@ -31,8 +31,14 @@ class App extends Component {
       const newTexts = [...oldTexts, json]
       console.log('Got message from server', json)
       switch (json.type) {
-        case 'textmessage':
+        case 'incomingMessage':
           console.log(json.content, json.type)
+          this.setState({
+            messages: newTexts,
+          })
+          break;
+        case 'incomingNotification':
+          console.log("Incoming Notification: ",json)
           this.setState({
             messages: newTexts,
           })
@@ -44,16 +50,6 @@ class App extends Component {
     this.socket.onclose= () => {
       console.log('Disconnected from the WebSocket');
     };
-
-    setTimeout(() => {
-      console.log("Simulating incoming message");
-      // Add a new message to the list of messages in the data store
-      const newMessage = {id: 3, currentUser: "Michelle", content: "Hello there!"};
-      const messages = this.state.messages.concat(newMessage)
-      // Update the state of the app component.
-      // Calling setState will trigger a call to render() in App and all child components.
-      this.setState({messages: messages})
-    }, 3000);
   }
 
   render() {
@@ -71,10 +67,10 @@ class App extends Component {
       </div>
     );
   }
-
+  // sends new text message to socket server
   _newText = (text) => {
     let setProfile= {
-      "type" : "textmessage",
+      "type" : "postMessage",
       "username": this.state.currentUser,
       "content": text,
     }
@@ -86,10 +82,18 @@ class App extends Component {
     //   messages: newTexts,
     // })
   };
-  _newName = (text) => {
-    this.setState({
-      currentUser: text
-    })
+
+  // updates state name. New feature needs to assign a new object to the current user name array.
+  // name object assigned structure needs to carry {"type", "username"}
+  _newName = (newName) => {
+    console.log("inside newName")
+    let setProfile= {
+      "type": "postNotification",
+      "username": this.state.currentUser,
+      "content": newName, 
+    }
+    this.socket.send(JSON.stringify(setProfile));
+    this.setState(this.state.currentUser = newName)
   }
 }
 export default App;
