@@ -5,23 +5,20 @@ class ChatBar extends Component {
     
     render() {
         
-        
         let messageInput = (event) => {
             if (event.key === 'Enter') {
-                if (event.target.value.trim() == ""){
-                    alert("Please enter a message");
+                if (event.target.value.trim() == ''){
+                    alert('Please enter a message');
                 } else {
-                    console.log("Enter was hit", event);
                     const keys = event.target.value;
                     this.props.newText(keys);
-                    event.target.value = "";
+                    event.target.value = '';
                 }
             }
         }
 
         let nameInput = (event) => {
             if (event.key === 'Enter') {
-                console.log("Name Enter key was hit", event);
                 const keys = event.target.value;
                 this.props.newName(keys);
             }

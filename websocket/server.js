@@ -36,13 +36,11 @@ wss.on('connection', (ws) => {
       type: 'numOfClients',
       numClients: wss.clients.size,
     };
-  console.log(numConnected)
   wss.broadcastJSON (numConnected);
   
   //if socket does not have a text color assigned, assign one to user's ws object.
-  if (ws.textColor === undefined){
+  if (ws.textColor === undefined) {
     ws.textColor = randomHexColor();
-    console.log(ws.textColor);
   }
 
   //When message is received.
