@@ -29,35 +29,39 @@ wss.broadcast = data => {
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
-    console.log('Client connected');
+    const numConnected = {
+      type: 'numOfClients',
+      numClients: wss.clients.size,
+    };
+    console.log(numConnected)
+    wss.broadcastJSON (numConnected);
     ws.on('message', data => {
-        console.log(`Got message from the client ${data}`);
-        const objData = JSON.parse(data);
-        wss.broadcastJSON = obj => wss.broadcast(JSON.stringify(obj));
+      const objData = JSON.parse(data);
+      wss.broadcastJSON = obj => wss.broadcast(JSON.stringify(obj));
 
-        switch (objData.type) {
-            case 'postMessage':
-                console.log('inside switch', objData);
-                const objectToBroadcast = {
-                    currentUser: objData.username,
-                    id: uuid(),
-                    content: objData.content,
-                    type: 'incomingMessage',
-                };
-                wss.broadcastJSON(objectToBroadcast);
-                break;
-            case 'postNotification':
-                console.log('inside post message')
-                const objectToBroadcast02 = {
-                  currentUser: objData.content,
-                  id: uuid(),
-                  content: `${objData.username} has changed their name to ${objData.content}`,
-                  type: 'incomingNotification'
-                };
-                wss.broadcastJSON(objectToBroadcast02);
-                break;
-            default:
-        }
+      switch (objData.type) {
+        
+        case 'postMessage':
+          const objectToBroadcast = {
+              currentUser: objData.username,
+              id: uuid(),
+              content: objData.content,
+              type: 'incomingMessage',
+          };
+          wss.broadcastJSON(objectToBroadcast);
+          break;
+        
+          case 'postNotification':
+          const objectToBroadcast02 = {
+            currentUser: objData.content,
+            id: uuid(),
+            content: `${objData.username} has changed their name to ${objData.content}`,
+            type: 'incomingNotification'
+          };
+          wss.broadcastJSON(objectToBroadcast02);
+          break;
+        default:
+      }
     })
 
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.

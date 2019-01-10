@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 class Message extends Component {
     render(){
         switch (this.props.message.type) {
+            
             case 'incomingMessage':
                 console.log("Incoming Notification render: ",this.props.message)
                 return (
@@ -12,13 +13,15 @@ class Message extends Component {
                         <span className="message-content">{this.props.message.content}</span>
                     </div>
                 )
-            case 'incomingNotification':
+            
+                case 'incomingNotification':
                 console.log("Incoming Notification render: ",this.props.messages)
                 return (
                     <div className="message">
                         <span className="message-content">{this.props.message.content}</span>
                     </div>
                 )
+            
             default:           
         }
     }
