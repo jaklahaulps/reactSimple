@@ -61,15 +61,15 @@ wss.on('connection', (ws) => {
         wss.broadcastJSON(objectToBroadcast);
         break;
       
-        case 'postNotification':
-        const objectToBroadcast02 = {
-          currentUser: objData.content,
-          id: uuid(),
-          content: `${objData.username} has changed their name to ${objData.content}`,
-          type: 'incomingNotification'
-        };
-        wss.broadcastJSON(objectToBroadcast02);
-        break;
+      case 'postNotification':
+      const objectToBroadcast02 = {
+        currentUser: objData.content,
+        id: uuid(),
+        content: `${objData.username} has changed their name to ${objData.content}`,
+        type: 'incomingNotification'
+      };
+      wss.broadcastJSON(objectToBroadcast02);
+      break;
       default:
     }
   })

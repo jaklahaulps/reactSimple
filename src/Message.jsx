@@ -7,14 +7,26 @@ class Message extends Component {
         switch (prop.type) {
             
             case 'incomingMessage':
-                return (
-                    <div className="message">
-                        <span className="message-username" style={{ color: prop.textColor }}> {prop.currentUser}</span>
-                        <span className="message-content">{prop.content}</span>
-                    </div>
-                )
+                const pattern = new RegExp(/.*\/.*\.(jpg|gif|png)$/g);
+                if (pattern.test(prop.content)){
+                    console.log("image render: ",pattern, prop.content)
+                    return (
+                        <div className="message">
+                            <span className="message-username" style={{ color: prop.textColor }}> {prop.currentUser}</span>
+                            <span className="message-content"><img src={prop.content}/></span>
+                        </div>
+                    )
+                } else {
+                    console.log("message render", prop.content)
+                    return (
+                        <div className="message">
+                            <span className="message-username" style={{ color: prop.textColor }}> {prop.currentUser}</span>
+                            <span className="message-content">{prop.content}</span>
+                        </div>
+                    )
+                }
             
-                case 'incomingNotification':
+            case 'incomingNotification':
                 return (
                     <div className="message">
                         <span className="message-content">{prop.content}</span>
