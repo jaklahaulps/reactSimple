@@ -3,13 +3,12 @@ import React, {Component} from 'react';
 
 class Message extends Component {
     render(){
-        const prop = this.props.message
+        const prop = this.props.message ;
         switch (prop.type) {
             
             case 'incomingMessage':
                 const pattern = new RegExp(/.*\/.*\.(jpg|gif|png)$/g);
                 if (pattern.test(prop.content)){
-                    console.log("image render: ",pattern, prop.content)
                     return (
                         <div className="message">
                             <span className="message-username" style={{ color: prop.textColor }}> {prop.currentUser}</span>
@@ -17,7 +16,6 @@ class Message extends Component {
                         </div>
                     )
                 } else {
-                    console.log("message render", prop.content)
                     return (
                         <div className="message">
                             <span className="message-username" style={{ color: prop.textColor }}> {prop.currentUser}</span>
