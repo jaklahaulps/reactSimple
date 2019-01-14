@@ -9,11 +9,23 @@ A web chat app which recognizes the number of users in the chatroom and displays
 ## Dependencies
 
 - React
+- React DOM
 - Webpack
 - WebpackDev Server
 - Websocket
 - Socket Server
 - Express
+- babel-core
+- babel-loader
+- babel-preset-es2015
+- babel-preset-react
+- css-loader
+- node-sass
+- sass-loader
+- sockjs-client
+- style-loader
+- random Hex color
+- uuid v4
 
 ## Getting Started
 - Install dependencies (using the `npm install` command).
