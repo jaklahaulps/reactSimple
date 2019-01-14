@@ -1,45 +1,23 @@
-React Boilerplate
-=====================
+# Chatty App
 
-A minimal and light dev environment for ReactJS.
+A web chat app which recognizes the number of users in the chatroom and displays image link contents (jpg, gif, png) in the chat. It is made using React and utilizes websockets.
 
-### Usage
+## Final Product
 
-Clone the boilerplate and create your own git repo.
+![First Screenshot](https://i.imgur.com/f3OxYF9.jpg "Chatty App")
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+## Dependencies
 
-Install the dependencies and start the server.
+- React
+- Webpack
+- WebpackDev Server
+- Websocket
+- Socket Server
+- Express
 
-```
-npm install
-npm start
-open http://localhost:3000
-```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
-
-### Dependencies
-
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+## Getting Started
+- Install dependencies (using the `npm install` command).
+- Run the web server by using the `npm start` in the react folder.
+- Run the socket server by using the `npm start` in the websocket folder.
+- Connect to the server through localhost:3000.
+- The web server will use port 3000 and the socket server uses port 3001.
